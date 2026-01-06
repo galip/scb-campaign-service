@@ -10,12 +10,10 @@ import org.springframework.stereotype.Component;
 public class CampaignProperties {
 
     private boolean enabled;
-
     private String type;
-
     private int discountRate;
 
-    private Response response = new Response();
+    private CampaignResponseProperties response = new CampaignResponseProperties();
 
     public boolean isEnabled() {
         return enabled;
@@ -41,35 +39,11 @@ public class CampaignProperties {
         this.discountRate = discountRate;
     }
 
-    public Response getResponse() {
+    public CampaignResponseProperties getResponse() {
         return response;
     }
 
-    public void setResponse(Response response) {
+    public void setResponse(CampaignResponseProperties response) {
         this.response = response;
-    }
-
-
-    public static class Response {
-
-        private String messagePrefix;
-
-        private boolean includeDiscount;
-
-        public String getMessagePrefix() {
-            return messagePrefix;
-        }
-
-        public void setMessagePrefix(String messagePrefix) {
-            this.messagePrefix = messagePrefix;
-        }
-
-        public boolean isIncludeDiscount() {
-            return includeDiscount;
-        }
-
-        public void setIncludeDiscount(boolean includeDiscount) {
-            this.includeDiscount = includeDiscount;
-        }
     }
 }

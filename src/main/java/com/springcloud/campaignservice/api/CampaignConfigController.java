@@ -1,5 +1,6 @@
 package com.springcloud.campaignservice.api;
 
+import com.springcloud.campaignservice.api.dto.CampaignResponse;
 import com.springcloud.campaignservice.config.CampaignProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +23,29 @@ public class CampaignConfigController {
                 "type", properties.getType(),
                 "discountRate", properties.getDiscountRate()
         );
+    }
+
+    @GetMapping("/info")
+    public CampaignResponse getCampaignInfo() {
+
+        if (!properties.isEnabled()) {
+            return new CampaignResponse("Campaign disabled");
+        }
+
+        StringBuilder message = new StringBuilder();
+
+        message.append(properties.getResponse().getMessagePrefix())
+                .append(" ");
+
+        message.append(properties.getType())
+                .append(" campaign active");
+
+        if (properties.getResponse().isIncludeDiscount()) {
+            message.append(" with ")
+                    .append(properties.getDiscountRate())
+                    .append("% discount");
+        }
+
+        return new CampaignResponse(message.toString());
     }
 }
