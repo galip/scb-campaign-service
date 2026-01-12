@@ -14,27 +14,26 @@ import org.springframework.stereotype.Component;
 public class CampaignProperties {
 
     private static final Logger log =
-            LoggerFactory.getLogger(CampaignResponseProperties.class);
+            LoggerFactory.getLogger(CampaignProperties.class);
 
     private boolean enabled;
     private String type;
     private int discountRate;
+    private Response response = new Response();
 
     @PostConstruct
     public void init() {
-        log.info("CampaignResponseProperties bean CREATED. instanceId={}",
+        log.info("CampaignProperties bean CREATED. instanceId={}",
                 System.identityHashCode(this));
     }
 
     @PreDestroy
     public void destroy() {
         log.info(
-                "CampaignResponseProperties bean DESTROYED. instanceId={}",
+                "CampaignProperties bean DESTROYED. instanceId={}",
                 System.identityHashCode(this)
         );
     }
-
-    private CampaignResponseProperties response = new CampaignResponseProperties();
 
     public boolean isEnabled() {
         return enabled;
@@ -60,11 +59,33 @@ public class CampaignProperties {
         this.discountRate = discountRate;
     }
 
-    public CampaignResponseProperties getResponse() {
+    public Response getResponse() {
         return response;
     }
 
-    public void setResponse(CampaignResponseProperties response) {
+    public void setResponse(Response response) {
         this.response = response;
+    }
+
+    public static class Response {
+
+        private String messagePrefix;
+        private boolean includeDiscount;
+
+        public String getMessagePrefix() {
+            return messagePrefix;
+        }
+
+        public void setMessagePrefix(String messagePrefix) {
+            this.messagePrefix = messagePrefix;
+        }
+
+        public boolean isIncludeDiscount() {
+            return includeDiscount;
+        }
+
+        public void setIncludeDiscount(boolean includeDiscount) {
+            this.includeDiscount = includeDiscount;
+        }
     }
 }
