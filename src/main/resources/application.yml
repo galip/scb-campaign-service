@@ -18,12 +18,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,env,refresh,busrefresh
-
-  endpoint:
-    refresh:
-      enabled: true
-    busrefresh:
-      enabled: true
-
-
+        include: health,info,env
